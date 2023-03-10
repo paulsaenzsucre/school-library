@@ -8,6 +8,7 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
   end
 
   attr_reader :id
@@ -19,6 +20,16 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental) unless @rentals.include?(rental)
+  end
+
+  def rental_list
+    list = '['
+    @rentals.each { |rental| list << "\n#{rental.date} | #{rental.book.title}" }
+    list << "\n]"
   end
 
   private
