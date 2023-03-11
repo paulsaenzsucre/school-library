@@ -28,7 +28,7 @@ class Person < Nameable
 
   def rental_list
     list = ''
-    @rentals.each { |rental| list << "\nDate: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}" }
+    @rentals.each { |rental| list << "\nDate: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}" } unless list
     list << "\n"
   end
 
