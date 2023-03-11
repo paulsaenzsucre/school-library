@@ -27,9 +27,9 @@ class Person < Nameable
   end
 
   def rental_list
-    list = '['
-    @rentals.each { |rental| list << "\n#{rental.date} | #{rental.book.title}" }
-    list << "\n]"
+    list = ''
+    @rentals.each { |rental| list << "\nDate: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}" }
+    list << "\n"
   end
 
   private
