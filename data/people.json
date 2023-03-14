@@ -1,0 +1,1 @@
+[{"class":"Teacher","id":"24361dcc-34ca-4efd-9fee-0751871269b0","name":"juan","age":21,"parent_permission":true,"rentals":[]},{"class":"Teacher","id":"052761dc-e721-42ea-a87f-835d92bc8a9a","name":"Pedro","age":22,"parent_permission":true,"rentals":[]},{"class":"Student","id":"3f654275-b810-4244-878e-61ab655c44bd","name":"juanaaaa","age":22,"parent_permission":true,"rentals":[]}]
