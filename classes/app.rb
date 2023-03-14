@@ -130,9 +130,7 @@ class App
 
   def load_data
     if File.exist?('data/books.json') && !File.nil?
-      json = JSON.parse(File.read('data/books.json'))
-
-      json.each do |book|
+      JSON.parse(File.read('data/books.json')).each do |book|
         @books.push(Book.new(book['title'], book['author']))
       end
     end
