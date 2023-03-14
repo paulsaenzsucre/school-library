@@ -2,7 +2,6 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
-require_relative 'datafiles'
 
 class App
   def initialize
@@ -122,12 +121,35 @@ class App
   end
 
   def save_data
-    path = File.join(File.dirname(__FILE__),'../data/books.json');
-    books_file = File.exist?(path) ? File.open(path, "w") :  File.new(path, "w")
-    File.write(path, @books.to_json)
+    File.exist?('data/books.json') ? File.open('data/books.json', "w") :  File.new('data/books.json', "w")
+    File.write('data/books.json', @books.to_json)
+
+    File.exist?('data/people.json') ? File.open('data/people.json', "w") :  File.new('data/people.json', "w")
+    File.write('data/people.json', @people.to_json)
+  end
+
+  def load_data
+    if File.exist?('data/books.json') && !File.nil?
+      json = JSON.parse(File.read('data/books.json'))
+
+      json.each do |book|
+        @books.push(Book.new(book['title'], book['author']))
+      end
+    end
+
+    if File.exist?('data/people.json') && !File.nil?
+      JSON.parse(File.read('data/people.json')).each do |person|
+        if person['class'] == 'Student'
+          @people.push(Student.new(person['age'], nil, person['name'], parent_permission: person['parent_permission']))
+        else
+          @people.push(Teacher.new(person['age'], person['specialization'], person['name'], parent_permission: person['parent_permission']))
+        end
+      end
+    end
   end
 
   def run
+    load_data
     loop do
       option = selected_menu_option
 
