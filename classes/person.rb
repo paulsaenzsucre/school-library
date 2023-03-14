@@ -33,7 +33,7 @@ class Person < Nameable
   end
 
   def to_hash
-    {class: self.class, id: @id, name: @name, age: @age, parent_permission: @parent_permission, rentals: @rentals}
+    {class: self.class, id: @id, name: @name, age: @age, parent_permission: @parent_permission}
   end
 
   def to_json(*option)

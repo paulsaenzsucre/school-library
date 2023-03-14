@@ -126,10 +126,14 @@ class App
 
     File.exist?('data/people.json') ? File.open('data/people.json', "w") :  File.new('data/people.json', "w")
     File.write('data/people.json', @people.to_json)
+
+    File.exist?('data/rentals.json') ? File.open('data/rentals.json', "w") :  File.new('data/rentals.json', "w")
+    File.write('data/rentals.json', @rentals.to_json)
+
   end
 
   def load_data
-    if File.exist?('data/books.json') && !File.nil?
+    if File.exist?('data/books.json') && File.size?('data/books.json')
       JSON.parse(File.read('data/books.json')).each do |book|
         @books.push(Book.new(book['title'], book['author']))
       end
@@ -142,6 +146,16 @@ class App
         else
           @people.push(Teacher.new(person['age'], person['specialization'], person['name'], parent_permission: person['parent_permission']))
         end
+      end
+    end
+
+    if File.exist?('data/rentals.json') && !File.nil?
+      JSON.parse(File.read('data/rentals.json')).each do |rental|
+        person = @people.find{|person| person.id == rental['person_id'] }
+        puts @people.find{|person| person.id == "c75ba893-7a28-42d9-b925-f1f8711d7c2a" }
+        people_list
+        book =  @books.find{|book| book.title == rental['book_title'] }
+        @rentals.push(Rental.new(rental['date'], book, person))
       end
     end
   end
