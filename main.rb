@@ -20,6 +20,16 @@ def selected_menu_option
   get_option_selected(1, 7)
 end
 
+def get_option_selected(from, to)
+  option = ''
+  loop do
+    print "Select a valid option [#{from} ... #{to}]:?"
+    option = gets.chomp.to_i
+    break if option >= from && option <= to
+  end
+
+  option
+end
 
 def wait_user
   puts 'Press any key to continue...'
