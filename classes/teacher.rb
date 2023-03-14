@@ -1,6 +1,8 @@
+require 'securerandom'
+
 class Teacher < Person
-  def initialize(age, specialization, name = 'Unknown', parent_permission: true)
-    super(age, name, parent_permission: parent_permission)
+  def initialize(age, specialization, name = 'Unknown', id = SecureRandom.uuid, parent_permission: true)
+    super(age, name, id, parent_permission: parent_permission)
     @specialization = specialization
   end
 
