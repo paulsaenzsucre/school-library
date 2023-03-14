@@ -2,6 +2,7 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'datafiles'
 
 class App
   def initialize
@@ -120,6 +121,12 @@ class App
     option
   end
 
+  def save_data
+    path = File.join(File.dirname(__FILE__),'../data/books.json');
+    books_file = File.exist?(path) ? File.open(path, "w") :  File.new(path, "w")
+    File.write(path, @books.to_json)
+  end
+
   def run
     loop do
       option = selected_menu_option
@@ -138,6 +145,7 @@ class App
       when 6
         puts person_rentals
       else
+        save_data
         break
       end
 
