@@ -2,9 +2,9 @@ require 'securerandom'
 require_relative 'nameable'
 
 class Person < Nameable
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name = 'Unknown', id = SecureRandom.uuid, parent_permission: true)
     super()
-    @id = SecureRandom.uuid
+    @id = id
     @name = name
     @age = age
     @parent_permission = parent_permission
@@ -33,10 +33,10 @@ class Person < Nameable
   end
 
   def to_hash
-    {class: self.class, id: @id, name: @name, age: @age, parent_permission: @parent_permission}
+    { class: self.class, id: @id, name: @name, age: @age, parent_permission: @parent_permission }
   end
 
-  def to_json(*option)
+  def to_json(*_option)
     to_hash.to_json
   end
 
