@@ -32,6 +32,14 @@ class Person < Nameable
     list << "\n"
   end
 
+  def to_hash
+    {class: self.class, id: @id, name: @name, age: @age, parent_permission: @parent_permission, rentals: @rentals}
+  end
+
+  def to_json(*option)
+    to_hash.to_json
+  end
+
   private
 
   def of_age?
