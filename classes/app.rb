@@ -2,6 +2,7 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'utils'
 
 class App
   def initialize
@@ -94,9 +95,7 @@ class App
   end
 
   def person_type
-    puts "\nSelect the tipe of person to create:\n"
-    puts '[1] Student'
-    puts "[2] Teacher\n"
+    puts "\nSelect the tipe of person to create:\n[1] Student\n[2] Teacher\n"
 
     get_option_selected(1, 2)
   end
@@ -121,45 +120,23 @@ class App
   end
 
   def save_data
-    File.exist?('data/books.json') ? File.open('data/books.json', "w") :  File.new('data/books.json', "w")
+    File.exist?('data/books.json') ? File.open('data/books.json', 'w') : File.new('data/books.json', 'w')
     File.write('data/books.json', @books.to_json)
 
-    File.exist?('data/people.json') ? File.open('data/people.json', "w") :  File.new('data/people.json', "w")
+    File.exist?('data/people.json') ? File.open('data/people.json', 'w') : File.new('data/people.json', 'w')
     File.write('data/people.json', @people.to_json)
 
-    File.exist?('data/rentals.json') ? File.open('data/rentals.json', "w") :  File.new('data/rentals.json', "w")
+    File.exist?('data/rentals.json') ? File.open('data/rentals.json', 'w') : File.new('data/rentals.json', 'w')
     File.write('data/rentals.json', @rentals.to_json)
-
   end
 
   def load_data
-    if File.exist?('data/books.json') && File.size?('data/books.json')
-      JSON.parse(File.read('data/books.json')).each do |book|
-        @books.push(Book.new(book['title'], book['author']))
-      end
-    end
-
-    if File.exist?('data/people.json') && !File.nil?
-      JSON.parse(File.read('data/people.json')).each do |person|
-        if person['class'] == 'Student'
-          @people.push(Student.new(person['age'], nil, person['name'], parent_permission: person['parent_permission']))
-        else
-          @people.push(Teacher.new(person['age'], person['specialization'], person['name'], parent_permission: person['parent_permission']))
-        end
-      end
-    end
-
-    if File.exist?('data/rentals.json') && !File.nil?
-      JSON.parse(File.read('data/rentals.json')).each do |rental|
-        person = @people.find{|person| person.id == rental['person_id'] }
-        puts @people.find{|person| person.id == "c75ba893-7a28-42d9-b925-f1f8711d7c2a" }
-        people_list
-        book =  @books.find{|book| book.title == rental['book_title'] }
-        @rentals.push(Rental.new(rental['date'], book, person))
-      end
-    end
+    load_books(@books)
+    load_people(@people)
+    load_rentals(@rentals, @people, @books)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def run
     load_data
     loop do
@@ -186,4 +163,5 @@ class App
       wait_user
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end
