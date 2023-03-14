@@ -119,7 +119,7 @@ class App
 
     option
   end
-  
+
   def run
     loop do
       option = selected_menu_option
