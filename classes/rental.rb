@@ -8,10 +8,10 @@ class Rental
   end
 
   def to_hash
-    {date: @date, book_title: @book.title, person_id: @person.id}
+    { date: @date, book_title: @book.title, person_id: @person.id }
   end
 
-  def to_json(*option)
+  def to_json(*_option)
     to_hash.to_json
   end
 

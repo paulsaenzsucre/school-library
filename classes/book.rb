@@ -20,10 +20,10 @@ class Book
   end
 
   def to_hash
-    {title: @title, author: @author}
+    { title: @title, author: @author }
   end
 
-  def to_json(*option)
+  def to_json(*_option)
     to_hash.to_json
   end
 end
