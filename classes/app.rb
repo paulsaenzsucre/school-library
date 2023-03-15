@@ -2,6 +2,7 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'utils'
 
 class App
   def initialize
@@ -39,7 +40,7 @@ class App
 
     rental = Rental.new(date, book, person)
     @rentals.push(rental) unless rental.nil?
-    puts "\nRental created successfully.\n"
+    "\nRental created successfully.\n"
   end
 
   def selected_person
@@ -67,7 +68,7 @@ class App
 
     book = Book.new(title, author)
     @books.push(book)
-    puts "\nBook created successfully.\n"
+    "\nBook created successfully.\n"
   end
 
   def create_person
@@ -89,14 +90,12 @@ class App
       specialization = gets.chomp
       teacher = Teacher.new(age, specialization, name, parent_permission: permission)
       @people.push(teacher)
-      puts "\nTeacher created successfully"
+      "\nTeacher created successfully"
     end
   end
 
   def person_type
-    puts "\nSelect the tipe of person to create:\n"
-    puts '[1] Student'
-    puts "[2] Teacher\n"
+    puts "\nSelect the tipe of person to create:\n[1] Student\n[2] Teacher\n"
 
     get_option_selected(1, 2)
   end
@@ -120,26 +119,30 @@ class App
     option
   end
 
+  def save_data
+    File.exist?('data/books.json') ? File.open('data/books.json', 'w') : File.new('data/books.json', 'w')
+    File.write('data/books.json', @books.to_json)
+
+    File.exist?('data/people.json') ? File.open('data/people.json', 'w') : File.new('data/people.json', 'w')
+    File.write('data/people.json', @people.to_json)
+
+    File.exist?('data/rentals.json') ? File.open('data/rentals.json', 'w') : File.new('data/rentals.json', 'w')
+    File.write('data/rentals.json', @rentals.to_json)
+    "\Data saved succesfully!"
+  end
+
+  def load_data
+    load_books(@books)
+    load_people(@people)
+    load_rentals(@rentals, @people, @books)
+  end
+
   def run
+    load_data
     loop do
       option = selected_menu_option
-
-      case option
-      when 1
-        puts books_list
-      when 2
-        puts people_list
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        puts person_rentals
-      else
-        break
-      end
+      puts send((MAIN_MENU[option][1]).to_s)
+      break if option == 7
 
       wait_user
     end
