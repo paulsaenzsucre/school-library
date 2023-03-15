@@ -1,3 +1,13 @@
+MAIN_MENU = {
+  1 => ['List all books.', 'books_list'],
+  2 => ['List all people.', 'people_list'],
+  3 => ['Create a person,', 'create_person'],
+  4 => ['Create a book.', 'create_book'],
+  5 => ['Create a rental.', 'create_rental'],
+  6 => ['List all rentals for a given person id.', 'person_rentals'],
+  7 => ['Exit.', 'save_data']
+}.freeze
+
 def load_books(books)
   return unless File.exist?('data/books.json') && File.size?('data/books.json')
 

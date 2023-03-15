@@ -40,7 +40,7 @@ class App
 
     rental = Rental.new(date, book, person)
     @rentals.push(rental) unless rental.nil?
-    puts "\nRental created successfully.\n"
+    "\nRental created successfully.\n"
   end
 
   def selected_person
@@ -68,7 +68,7 @@ class App
 
     book = Book.new(title, author)
     @books.push(book)
-    puts "\nBook created successfully.\n"
+    "\nBook created successfully.\n"
   end
 
   def create_person
@@ -90,7 +90,7 @@ class App
       specialization = gets.chomp
       teacher = Teacher.new(age, specialization, name, parent_permission: permission)
       @people.push(teacher)
-      puts "\nTeacher created successfully"
+      "\nTeacher created successfully"
     end
   end
 
@@ -128,6 +128,7 @@ class App
 
     File.exist?('data/rentals.json') ? File.open('data/rentals.json', 'w') : File.new('data/rentals.json', 'w')
     File.write('data/rentals.json', @rentals.to_json)
+    "\Data saved succesfully!"
   end
 
   def load_data
@@ -136,32 +137,14 @@ class App
     load_rentals(@rentals, @people, @books)
   end
 
-  # rubocop:disable Metrics/MethodLength
   def run
     load_data
     loop do
       option = selected_menu_option
-
-      case option
-      when 1
-        puts books_list
-      when 2
-        puts people_list
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        puts person_rentals
-      else
-        save_data
-        break
-      end
+      puts send((MAIN_MENU[option][1]).to_s)
+      break if option == 7
 
       wait_user
     end
   end
-  # rubocop:enable Metrics/MethodLength
 end
