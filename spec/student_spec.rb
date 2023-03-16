@@ -3,7 +3,7 @@ require_relative '../classes/classroom'
 
 describe Student do
   before :each do
-    @student = Student.new(22, 'Ralph Laurent', 123, true)
+    @student = Student.new(22, nil, 'Ralph Laurent')
   end
 
   context 'testing methods' do
@@ -12,12 +12,12 @@ describe Student do
     end
 
     it '#play_hooky' do
-    expect(@student.play_hooky).to eql('¯\(ツ)/¯')
+    expect(@student.play_hooky).to eql('¯(ツ)/¯')
     end
 
     it 'add to a classroom #add_to_classroom' do
       classroom = Classroom.new('Math')
-      @student.classroom = (classroom)
+      @student.add_to_classroom(classroom)
       expect(@student.classroom).to eq(classroom)
     end
   end
