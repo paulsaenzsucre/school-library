@@ -5,8 +5,8 @@ require_relative '../classes/teacher'
 require_relative '../classes/capitalize_decorator'
 
 describe CapitalizeDecorator do
-  context "When testing the correct_name method" do
-    it "should capitalize de Nameable name" do
+  context 'When testing the correct_name method' do
+    it 'should capitalize de Nameable name' do
       person = Person.new(18, 'juan')
       student = Student.new(18, nil, 'pedro')
       teacher = Teacher.new(18, 'Math', 'lucas')

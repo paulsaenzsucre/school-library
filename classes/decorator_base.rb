@@ -2,7 +2,7 @@ require_relative 'nameable'
 
 class DecoratorBase < Nameable
   attr_accessor :nameable
-  
+
   def initialize(nameable)
     super()
     @nameable = nameable

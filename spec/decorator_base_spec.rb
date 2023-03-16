@@ -1,16 +1,16 @@
 require_relative '../classes/decorator_base'
 
 describe DecoratorBase do
-  context "When testing DecoratorBase Class" do
-    it "should create a DecoratorBase object" do
+  context 'When testing DecoratorBase Class' do
+    it 'should create a DecoratorBase object' do
       decorator_base = DecoratorBase.new('kevin')
       expect(decorator_base).to be_instance_of(DecoratorBase)
       expect(decorator_base.nameable).to eq 'kevin'
     end
   end
 
-  context "When testing correct_name method" do
-    it "should create a DecoratorBase object" do
+  context 'When testing correct_name method' do
+    it 'should create a DecoratorBase object' do
       decorator_base = DecoratorBase.new('kevin')
       expect(decorator_base).to be_instance_of(DecoratorBase)
       expect(decorator_base.nameable).to eq 'kevin'

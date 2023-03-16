@@ -3,7 +3,7 @@ require_relative '../classes/classroom'
 
 describe Teacher do
   before :each do
-    @teacher = Teacher.new(25, 'History', name= 'Jane Deer', 123)
+    @teacher = Teacher.new(25, 'History')
   end
 
   context 'testing methods' do

@@ -12,7 +12,7 @@ describe Student do
     end
 
     it '#play_hooky' do
-    expect(@student.play_hooky).to eql('¯(ツ)/¯')
+      expect(@student.play_hooky).to eql('¯(ツ)/¯')
     end
 
     it 'add to a classroom #add_to_classroom' do
