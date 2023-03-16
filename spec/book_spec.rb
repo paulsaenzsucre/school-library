@@ -31,5 +31,12 @@ describe Book do
     end
   end
 
-  context "When testing the to_json"
+  context "When testing the to_json" do
+    it "should create a JSON representation of book attributes" do
+      book = Book.new('Book1', 'Author1')
+      expected_json = "{\"title\":\"Book1\",\"author\":\"Author1\"}"
+      book_to_json = book.to_json
+      expect(book_to_json).to eq expected_json
+    end
+  end
 end
